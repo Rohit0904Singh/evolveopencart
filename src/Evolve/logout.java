@@ -16,13 +16,20 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class logout {
+	
+		
 public static void main(String[] args) throws IOException {
+	
+	
+
 		
 		try {
 
 		System.setProperty("webdriver.chrome.driver","D:\\chromedriver.exe");
 			WebDriver driver = new ChromeDriver();
 		    driver.manage().window().maximize();
+		    
+
 	
 	    
 		FileInputStream ExcelFile = new FileInputStream("D:/signup data.xlsx");
@@ -87,6 +94,11 @@ public static void main(String[] args) throws IOException {
 			e.printStackTrace();
 		}
 		}
+
+private static void highLighterMethod(WebDriver driver) {
+	// TODO Auto-generated method stub
+	
+}
 	}
 	
 	

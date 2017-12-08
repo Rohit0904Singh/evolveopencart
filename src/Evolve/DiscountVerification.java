@@ -19,11 +19,15 @@ public class DiscountVerification {
 	public static void main(String[] args) {
 
 		try {
-
-		System.setProperty("webdriver.chrome.driver","D:\\chromedriver.exe");
+			System.setProperty("webdriver.chrome.driver","D:\\chromedriver.exe");
 			WebDriver driver = new ChromeDriver();
 		    driver.manage().window().maximize();
 	
+
+			
+			for(int a=1;a<4;a++)
+			{
+		
 	    
 		FileInputStream ExcelFile = new FileInputStream("D:/signup data.xlsx");
 		XSSFWorkbook wb = new XSSFWorkbook(ExcelFile); 
@@ -69,7 +73,8 @@ public class DiscountVerification {
 		WebDriverWait wait = new WebDriverWait(driver, 5); 
 		wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//*[@id='Menu_YnwtL2RI']/nav/ul/li[1]/ul/li[5]/a/span")));  // until this submenu is found
 
-		
+		if(a==1)
+				{
 
 		//Add items to cart
 		driver.findElement(By.xpath("//*[@id='ProductsSystem_ReH9ivFH']/div[1]/div[1]/div/div[2]/div[2]/div[1]/a")).click();
@@ -81,6 +86,43 @@ public class DiscountVerification {
 		driver.findElement(By.xpath("//*[@id='ProductsSystem_ReH9ivFH']/div[1]/div[8]/div/div[2]/div[2]/div[1]/a")).click();
 
 		Thread.sleep(5000);
+		}
+		
+		else if(a==2)
+		{
+			for(int b=1;b<5;b++)
+			{
+
+//Add items to cart
+driver.findElement(By.xpath("//*[@id='ProductsSystem_ReH9ivFH']/div[1]/div[1]/div/div[2]/div[2]/div[1]/a")).click();
+Thread.sleep(2000);
+driver.findElement(By.xpath("//*[@id='ProductsSystem_ReH9ivFH']/div[1]/div[5]/div/div[2]/div[2]/div[1]/a")).click();
+Thread.sleep(2000);
+driver.findElement(By.xpath("//*[@id='ProductsSystem_ReH9ivFH']/div[1]/div[6]/div/div[2]/div[2]/div[1]/a")).click();
+Thread.sleep(2000);
+driver.findElement(By.xpath("//*[@id='ProductsSystem_ReH9ivFH']/div[1]/div[8]/div/div[2]/div[2]/div[1]/a")).click();
+
+Thread.sleep(5000);
+			}
+}
+	
+		else if(a==3)
+		{
+			for(int b=1;b<8;b++)
+			{
+
+//Add items to cart
+driver.findElement(By.xpath("//*[@id='ProductsSystem_ReH9ivFH']/div[1]/div[1]/div/div[2]/div[2]/div[1]/a")).click();
+Thread.sleep(2000);
+driver.findElement(By.xpath("//*[@id='ProductsSystem_ReH9ivFH']/div[1]/div[5]/div/div[2]/div[2]/div[1]/a")).click();
+Thread.sleep(2000);
+driver.findElement(By.xpath("//*[@id='ProductsSystem_ReH9ivFH']/div[1]/div[6]/div/div[2]/div[2]/div[1]/a")).click();
+Thread.sleep(2000);
+driver.findElement(By.xpath("//*[@id='ProductsSystem_ReH9ivFH']/div[1]/div[8]/div/div[2]/div[2]/div[1]/a")).click();
+
+Thread.sleep(5000);
+			}
+}
 	
 		//Go to cart
 		WebElement cart =driver.findElement(By.xpath("//*[@class='tb_icon ico-organie-basket']"));
@@ -106,7 +148,7 @@ public class DiscountVerification {
 		{
 			int evolvemoney=subtotal3*5;
 			int evolvemoney1=evolvemoney/100;
-			System.out.println("5% evolve money:- "+evolvemoney1);
+			System.out.println("Expected 5% evolve money:- "+evolvemoney1);
 		}
 
 		
@@ -114,17 +156,17 @@ public class DiscountVerification {
 		{
 			int evolvemoney=subtotal3*7;
 			int evolvemoney1=evolvemoney/100;
-			System.out.println("7% evolve money:- "+evolvemoney1);	
+			System.out.println("Expected 7% evolve money:- "+evolvemoney1);	
 		}
 		
 		if(subtotal3>1000)
 		{
 			int evolvemoney=subtotal3*10;
 			int evolvemoney1=evolvemoney/100;
-			System.out.println("10% evolve money:- "+evolvemoney1);
+			System.out.println("Expected 10% evolve money:- "+evolvemoney1);
 		}
 		
-/*		
+	
 		
 		//Check out process
 		WebElement we1=	driver.findElement(By.id("button-payment-address"));
@@ -144,21 +186,80 @@ public class DiscountVerification {
 		Thread.sleep(2000);
 
 		
+		String orderid=driver.findElement(By.xpath("//*[@id='System_6OjM9zPg']/div/div/p[1]")).getText();
+		String orderid1=orderid.replaceAll("[^0-9]", "");
+		int orderid2= Integer.valueOf(orderid1);
 		
 		System.out.println(driver.findElement(By.xpath("//*[@id='System_6OjM9zPg']/div/div/p[1]")).getText());
 		System.out.println(driver.findElement(By.xpath(".//*[@id='System_6OjM9zPg']/div/div/p[2]")).getText());
 		
-		
-		//identify logout
-				WebElement logout = driver.findElement(By.xpath("//*[@id='Menu_YnwtL2RI']/nav/ul/li[1]/ul/li[5]/a/span"));
-				
-				JavascriptExecutor executor1 = (JavascriptExecutor)driver;
-				executor1.executeScript("arguments[0].click()", logout);
-				Thread.sleep(2000);
+	
 
-	*/
+		
+		//backend process
+	WebDriver driver1 = new ChromeDriver();
+    driver1.manage().window().maximize();
+	driver1.get("http://opencart.evolvesnacks.com/admin");
+	
+	driver1.findElement(By.id("input-username")).sendKeys("admin");
+	driver1.findElement(By.id("input-password")).sendKeys("Evolve@123#");
+	driver1.findElement(By.xpath("//*[@class='text-right']/button")).click();
+	
+	Thread.sleep(5000);
+	driver1.findElement(By.xpath("//*[@id='menu-sale']/a")).click();
+	driver1.findElement(By.xpath("//*[@id='menu-sale']/ul/li[1]/a")).click();
+	
+	Thread.sleep(2000);
+	driver1.findElement(By.id("input-order-id")).sendKeys(""+orderid2);
+	driver1.findElement(By.id("button-filter")).click();
+	
+	driver1.findElement(By.id("tn-"+orderid2)).sendKeys("123456");
+	driver1.findElement(By.xpath("//*[@id='form-order']/div/table/tbody/tr/td[1]/input[1]")).click();
+	
+	driver1.findElement(By.xpath("//*[@id='bulk_action_id']")).sendKeys("complete");
+	driver1.findElement(By.xpath("//*[@id='button-bulk-action']")).click();
+	Thread.sleep(5000);
+	driver1.close();
+	
+	
+	//check evolve money gained
+	
+	 //driver.findElement(By.xpath("//*[@id='Menu_YnwtL2RI']/nav/ul/li[1]/ul/li[5]/a/span")).click();
+	driver.findElement(By.xpath("//*[@class='tb_icon']")).click();
+	driver.findElement(By.xpath("//*[@id='System_DdmbwILT']/div/div[2]/ul/li[2]/a")).click();
+	Thread.sleep(2000);
+	
+	String order= driver.findElement(By.xpath("//*[@id='System_WoxEIx9A']/div[1]/table/tbody/tr/td[2]")).getText();
+	String order1=order.replaceAll("[^0-9]", "");
+	int order2= Integer.valueOf(order1);
+	
+	if(order2==orderid2)
+	{
+		String money=driver.findElement(By.xpath("//*[@id='System_WoxEIx9A']/div[1]/table/tbody/tr/td[3]")).getText();
+		String money1=money.replaceAll("[^0-9]", "");
+		int money2= Integer.valueOf(money1);
+		System.out.println("received Evolve money:- "+money2);
+		
+		
+	}
+	
+	
+	//identify logout
+		WebElement logout = driver.findElement(By.xpath("//*[@id='Menu_YnwtL2RI']/nav/ul/li[1]/ul/li[5]/a/span"));
+	JavascriptExecutor executor1 = (JavascriptExecutor)driver;
+	executor1.executeScript("arguments[0].click()", logout);
+	Thread.sleep(2000);
+
+
+    
+     System.out.println("\n\n\n");
+	
 		} 
-//	driver.close();
+			
+
+
+		}
+			 driver.close();
 
 		}
 		
@@ -171,6 +272,7 @@ public class DiscountVerification {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		
 		}
 	}
 	
