@@ -20,7 +20,7 @@ public class forgotpassword {
 
 		try {
 
-			System.setProperty("webdriver.chrome.driver","D:\\chromedriver.exe");
+			System.setProperty("webdriver.chrome.driver","E:\\chromedriver.exe");
 			WebDriver driver,driver2;
 			
 		
@@ -40,7 +40,7 @@ public class forgotpassword {
 				executor.executeScript("arguments[0].click()", login);
 				Thread.sleep(2000);		
 				
-				//Go to fogot password
+				//Go to forgot password
 				WebElement forgot=driver.findElement(By.xpath("//*[@id='System_enua7jun']/div/div[2]/div/form/div/div[1]/a"));
 				JavascriptExecutor executor2 = (JavascriptExecutor)driver;
 				executor2.executeScript("arguments[0].click()", forgot);
@@ -48,12 +48,16 @@ public class forgotpassword {
 				
 				//Enter email
 				driver.findElement(By.id("input-email")).sendKeys(email);
+				System.out.println("\nentered email");
 
 				//click continue button
 				WebElement cont = driver.findElement(By.xpath("//*[@id='System_enua7jun']/form/div/div[2]/input"));
 				JavascriptExecutor executor3 = (JavascriptExecutor)driver;
 				executor3.executeScript("arguments[0].click()", cont);
 				Thread.sleep(60000);
+				WebElement message= driver.findElement(By.xpath("//*[@id='System_enua7jun']/div[1]"));
+				String message1=message.getText();
+				System.out.println("message :- "+message1);
 				
 				
 			     driver2 = new ChromeDriver();
@@ -76,16 +80,16 @@ public class forgotpassword {
 					{
 					WebElement b=driver2.findElement(By.xpath("//*[@id=':34']/tbody/tr["+i+"]/td[4]/div[2]/span"));
 					String b1=b.getText();
-					System.out.println(b1);
+					System.out.println("From:- "+b1);
 					 if(b1.equals("Evolve Snacks"))
 					{
-						WebElement d=driver2.findElement(By.xpath("//*[@id=':2v']/tbody/tr["+i+"]/td[6]/div/div/div/span"));
+						WebElement d=driver2.findElement(By.xpath("//*[@id=':34']/tbody/tr["+i+"]/td[6]/div/div/div/span"));
 						String d1=d.getText();
-						System.out.println(d1);
+						System.out.println("Email subject:-" +d1);
 						
 					if(d1.equals("Reset Your Account Password"))
 						{
-							driver2.findElement(By.xpath("//*[@id=':2v']/tbody/tr["+i+"]/td[6]")).click();
+							driver2.findElement(By.xpath("//*[@id=':34']/tbody/tr["+i+"]/td[6]")).click();
 							Thread.sleep(5000);
 							driver2.findElement(By.xpath("//*[@class='gs']/div[7]/div/table/tbody/tr/td/table/tbody/tr/td")).click();
 							
@@ -95,7 +99,6 @@ public class forgotpassword {
 					
 					
 					Set<String> ids = driver2.getWindowHandles();
-					System.out.println(ids.size());
 					Iterator<String> it=ids.iterator();
 					 
 					String parentid=(String) it.next();
@@ -111,6 +114,7 @@ public class forgotpassword {
 					JavascriptExecutor submit1 = (JavascriptExecutor)driver2;
 					submit1.executeScript("arguments[0].click()", submit);
 					Thread.sleep(5000);
+					System.out.println("password changed successfuly");
 
 					break;
 					}
@@ -128,6 +132,7 @@ public class forgotpassword {
 					JavascriptExecutor loginex = (JavascriptExecutor)driver;
 					loginex.executeScript("arguments[0].click()", login1);
 					Thread.sleep(3000);
+					System.out.println("login successful");
 					
 					//Click on BuySnacks 
 					WebElement buysnacks=driver.findElement(By.xpath("//*[@id='menu_category_Menu_VIfWm2LT_461']/a/span/span"));
@@ -148,6 +153,7 @@ public class forgotpassword {
 					JavascriptExecutor logout1 = (JavascriptExecutor)driver;
 					logout1.executeScript("arguments[0].click()", logout);
 					Thread.sleep(2000);
+					System.out.println("logout successful");
 
 					
 					driver.quit();
