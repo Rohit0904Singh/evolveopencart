@@ -20,16 +20,16 @@ public class login {
 		
 		try {
 
-		System.setProperty("webdriver.chrome.driver","D:\\chromedriver.exe");
+		System.setProperty("webdriver.chrome.driver","E:\\chromedriver.exe");
 			WebDriver driver = new ChromeDriver();
 		    driver.manage().window().maximize();
 
-		FileInputStream ExcelFile = new FileInputStream("D:/signup data.xlsx");
+		FileInputStream ExcelFile = new FileInputStream("E:/signup data.xlsx");
 		XSSFWorkbook wb = new XSSFWorkbook(ExcelFile); 
 		XSSFSheet sheet = wb.getSheet("Sheet1");
 			
 		
-		for(int i=1;i<2;i++)
+		for(int i=1;i<11;i++)
 		{
 			
 			XSSFRow row = sheet.getRow(i);
@@ -38,21 +38,23 @@ public class login {
 			
 			//	Thread.sleep(2000);
 			
+		  //open evolve snacks
+			driver.get("http://opencart.evolvesnacks.com");
 			
-		//open evolve snacks
-		driver.get("http://opencart.evolvesnacks.com");
-		
-		//Go to login screen
-		driver.findElement(By.xpath("//*[@id='Menu_YnwtL2RI']/nav/ul/li[1]/a/span/span/i")).click();
-		
-		//Enter email and password
-		driver.findElement(By.xpath("//*[@id='input-email']")).sendKeys(email);
-		driver.findElement(By.xpath("//*[@id='input-password']")).sendKeys(password);
-		
-		//click on login button
-		driver.findElement(By.xpath("//*[@class='buttons']/div[2]/input")).click();
-		
-		Thread.sleep(2000);
+			//Go to login screen
+			WebElement login=driver.findElement(By.xpath("//*[@id='Menu_YnwtL2RI']/nav/ul/li[1]/a/span/span/i"));
+			JavascriptExecutor executor5 = (JavascriptExecutor)driver;
+			executor5.executeScript("arguments[0].click()", login);
+			Thread.sleep(2000);
+			
+			//Enter email and password
+			driver.findElement(By.xpath("//*[@id='input-email']")).sendKeys(email);
+			driver.findElement(By.xpath("//*[@id='input-password']")).sendKeys(password);
+			
+			//click on login button
+			driver.findElement(By.xpath("//*[@class='buttons']/div[2]/input")).click();
+			
+			Thread.sleep(2000);
 
 		
 		//Click on BuySnacks 
@@ -60,6 +62,7 @@ public class login {
 		JavascriptExecutor executor = (JavascriptExecutor)driver;
 		executor.executeScript("arguments[0].click()", buysnacks);
 		Thread.sleep(2000);
+		System.out.println("\n\nlogin successful:- "+email);
 		
 		//Add items to cart
 		driver.findElement(By.xpath("//*[@id='ProductsSystem_ReH9ivFH']/div[1]/div[1]/div/div[2]/div[2]/div[1]/a")).click();
@@ -105,8 +108,10 @@ public class login {
 		
 		System.out.println(driver.findElement(By.xpath("//*[@id='System_6OjM9zPg']/div/div/p[1]")).getText());
 		System.out.println(driver.findElement(By.xpath(".//*[@id='System_6OjM9zPg']/div/div/p[2]")).getText());
-
 		
+		System.out.println("Order placed by :-"+email);
+
+		//hover my account
 		WebElement myaccount = driver.findElement(By.xpath("//*[@id='Menu_YnwtL2RI']/nav/ul/li[1]/a"));
 		Actions action = new Actions(driver);
 		action.moveToElement(myaccount).build().perform();
@@ -116,10 +121,11 @@ public class login {
 
 		//identify logout
 		WebElement logout = driver.findElement(By.xpath("//*[@id='Menu_YnwtL2RI']/nav/ul/li[1]/ul/li[5]/a/span"));
-		
 		JavascriptExecutor executor2 = (JavascriptExecutor)driver;
 		executor2.executeScript("arguments[0].click()", logout);
 		Thread.sleep(2000);
+		
+		System.out.println("logout:- "+email);
 
 
 		} 

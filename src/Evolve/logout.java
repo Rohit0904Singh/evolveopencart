@@ -25,19 +25,19 @@ public static void main(String[] args) throws IOException {
 		
 		try {
 
-		System.setProperty("webdriver.chrome.driver","D:\\chromedriver.exe");
+		System.setProperty("webdriver.chrome.driver","E:\\chromedriver.exe");
 			WebDriver driver = new ChromeDriver();
 		    driver.manage().window().maximize();
 		    
 
 	
 	    
-		FileInputStream ExcelFile = new FileInputStream("D:/signup data.xlsx");
+		FileInputStream ExcelFile = new FileInputStream("E:/signup data.xlsx");
 		XSSFWorkbook wb = new XSSFWorkbook(ExcelFile); 
 		XSSFSheet sheet = wb.getSheet("Sheet1");
 			
 		
-		for(int i=1;i<2;i++)
+		for(int i=1;i<11;i++)
 		{
 			
 			XSSFRow row = sheet.getRow(i);
@@ -47,20 +47,26 @@ public static void main(String[] args) throws IOException {
 			//	Thread.sleep(2000);
 			
 			
-		//open evolve snacks
-		driver.get("http://opencart.evolvesnacks.com");
-		
-		//Go to login screen
-		driver.findElement(By.xpath("//*[@id='Menu_YnwtL2RI']/nav/ul/li[1]/a/span/span/i")).click();
-		
-		//Enter email and password
-		driver.findElement(By.xpath("//*[@id='input-email']")).sendKeys(email);
-		driver.findElement(By.xpath("//*[@id='input-password']")).sendKeys(password);
-		
-		//click on login button
-		driver.findElement(By.xpath("//*[@class='buttons']/div[2]/input")).click();
-		
-		Thread.sleep(2000);
+		    //open evolve snacks
+			driver.get("http://opencart.evolvesnacks.com");
+			
+			//Go to login screen
+			WebElement login=driver.findElement(By.xpath("//*[@id='Menu_YnwtL2RI']/nav/ul/li[1]/a/span/span/i"));
+			JavascriptExecutor executor5 = (JavascriptExecutor)driver;
+			executor5.executeScript("arguments[0].click()", login);
+			Thread.sleep(2000);
+			
+			//Enter email and password
+			driver.findElement(By.xpath("//*[@id='input-email']")).sendKeys(email);
+			driver.findElement(By.xpath("//*[@id='input-password']")).sendKeys(password);
+			
+			//click on login button
+			driver.findElement(By.xpath("//*[@class='buttons']/div[2]/input")).click();
+			
+			Thread.sleep(2000);
+			
+			System.out.println(i+" login successful"+":- "+email);
+
 
 		
 		//Click on BuySnacks 

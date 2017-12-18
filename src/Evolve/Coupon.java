@@ -22,12 +22,12 @@ public class Coupon {
 			
 			try {
 
-			System.setProperty("webdriver.chrome.driver","D:\\chromedriver.exe");
+			System.setProperty("webdriver.chrome.driver","E:\\chromedriver.exe");
 				WebDriver driver = new ChromeDriver();
 			    driver.manage().window().maximize();
 
 		    
-			FileInputStream ExcelFile = new FileInputStream("D:/signup data.xlsx");
+			FileInputStream ExcelFile = new FileInputStream("E:/signup data.xlsx");
 			XSSFWorkbook wb = new XSSFWorkbook(ExcelFile); 
 			XSSFSheet sheet = wb.getSheet("Sheet1");
 			XSSFSheet sheet1 = wb.getSheet("Sheet2");
@@ -35,7 +35,7 @@ public class Coupon {
 
 		
 			
-			for(int i=1;i<2;i++)
+			for(int i=1;i<5;i++)
 			{
 				
 				XSSFRow row = sheet.getRow(i);
@@ -45,22 +45,31 @@ public class Coupon {
 				//	Thread.sleep(2000);
 				
 				
-			//open evolve snacks
-			driver.get("http://opencart.evolvesnacks.com");
-			
-			//Go to login screen
-			driver.findElement(By.xpath("//*[@id='Menu_YnwtL2RI']/nav/ul/li[1]/a/span/span/i")).click();
-			
-			//Enter email and password
-			driver.findElement(By.xpath("//*[@id='input-email']")).sendKeys(email);
-			driver.findElement(By.xpath("//*[@id='input-password']")).sendKeys(password);
-			
-			//click on login button
-			driver.findElement(By.xpath("//*[@class='buttons']/div[2]/input")).click();
-			
-			Thread.sleep(2000);
+			    //open evolve snacks
+				driver.get("http://opencart.evolvesnacks.com");
+				
+				//Go to login screen
+				WebElement login=driver.findElement(By.xpath("//*[@id='Menu_YnwtL2RI']/nav/ul/li[1]/a/span/span/i"));
+				JavascriptExecutor executor5 = (JavascriptExecutor)driver;
+				executor5.executeScript("arguments[0].click()", login);
+				Thread.sleep(2000);
+				
+				//Enter email and password
+				driver.findElement(By.xpath("//*[@id='input-email']")).sendKeys(email);
+				driver.findElement(By.xpath("//*[@id='input-password']")).sendKeys(password);
+				
+				//click on login button
+				driver.findElement(By.xpath("//*[@class='buttons']/div[2]/input")).click();
+				
+				Thread.sleep(2000);
+				
+				
+				System.out.println("\n\n"+i+") login successful:- "+email);
 
-			for(int j=0;j<sheet1.getLastRowNum();j++)
+
+			//for(int j=0;j<sheet1.getLastRowNum();j++)
+				for(int j=0;j<5;j++)
+
 			{
 			//Click on BuySnacks 
 			WebElement buysnacks=driver.findElement(By.xpath("//*[@id='menu_category_Menu_VIfWm2LT_461']/a/span/span"));
@@ -95,14 +104,15 @@ public class Coupon {
 			//Enter Coupon
 			XSSFRow row1 = sheet1.getRow(j);
 		    String coupon = row1.getCell(0).getStringCellValue();
-		    System.out.println(coupon);
 			driver.findElement(By.xpath("//*[@id='accordion']/div[1]/div[1]/h4/a")).click();
 			Thread.sleep(5000);
 			driver.findElement(By.xpath(" //*[@id='input-coupon']")).sendKeys(coupon);
+		    System.out.println("\nCoupon entered:- "+coupon);
 			driver.findElement(By.xpath("//*[@id='button-coupon']")).click();
 			Thread.sleep(5000);
-			String couponmessage =driver.findElement(By.xpath("//*[@id='System_RGvMdVcm']/div/div[2]/div[1]")).getText();
-			System.out.println(couponmessage);
+			WebElement couponmessage =driver.findElement(By.xpath("//*[@id='System_HsRdKbkl']/div/div[2]/div[1]"));
+			String couponmessage1=couponmessage.getText();
+			System.out.println("coupon messgae:- "+couponmessage1);
 			Thread.sleep(2000);
 
 			//Check out process
@@ -122,11 +132,10 @@ public class Coupon {
 			driver.findElement(By.xpath("//*[@id='collapse-checkout-confirm']/div/div[2]/div/input")).click();
 			Thread.sleep(2000);
 
-			
-			
 			System.out.println(driver.findElement(By.xpath("//*[@id='System_6OjM9zPg']/div/div/p[1]")).getText());
-			System.out.println(driver.findElement(By.xpath(".//*[@id='System_6OjM9zPg']/div/div/p[2]")).getText());
+			//System.out.println(driver.findElement(By.xpath(".//*[@id='System_6OjM9zPg']/div/div/p[2]")).getText());
 
+			System.out.println("odrder placed by:- "+email);
 			}
 			WebElement myaccount = driver.findElement(By.xpath("//*[@id='Menu_YnwtL2RI']/nav/ul/li[1]/a"));
 			Actions action = new Actions(driver);
@@ -142,6 +151,7 @@ public class Coupon {
 			executor2.executeScript("arguments[0].click()", logout);
 			Thread.sleep(2000);
 
+			System.out.println("logout:- "+email);
 			
 
 			} 

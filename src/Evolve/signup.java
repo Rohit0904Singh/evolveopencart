@@ -2,8 +2,7 @@ package Evolve;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
-import java.util.UUID;
-
+import org.apache.commons.lang3.RandomStringUtils;
 import org.apache.poi.xssf.usermodel.XSSFCell;
 import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
@@ -25,20 +24,28 @@ public class signup {
 		try {
 			
 
-		System.setProperty("webdriver.chrome.driver", "D:\\chromedriver.exe");
+		System.setProperty("webdriver.chrome.driver", "E:\\chromedriver.exe");
 		WebDriver driver =new ChromeDriver();
 	    driver.manage().window().maximize();
-
+	    
+	    driver.get("http://opencart.evolvesnacks.com");
 		
-		FileInputStream ExcelFile = new FileInputStream("D:/signup data.xlsx");
+		FileInputStream ExcelFile = new FileInputStream("E:/signup data.xlsx");
 		XSSFWorkbook wb = new XSSFWorkbook(ExcelFile); 
 		XSSFSheet sheet = wb.getSheet("Sheet1");
 			
 		
-		for(int i=2;i<3;i++)
+		for(int i=17;i<19;i++)
 		{
+			//Go to login screen
+			WebElement login=driver.findElement(By.xpath("//*[@id='Menu_YnwtL2RI']/nav/ul/li[1]/a/span/span/i"));
+			JavascriptExecutor executor = (JavascriptExecutor)driver;
+			executor.executeScript("arguments[0].click()", login);
+			Thread.sleep(2000);	
 			
-			String uuid = UUID.randomUUID().toString().replaceAll("[^0-9]", "");
+			
+			String uuid1 = RandomStringUtils.random(16, "0123456789abcdef"); 
+			
 			// long l = ByteBuffer.wrap(uuid.toString().getBytes()).getLong();
 			XSSFRow row = sheet.getRow(i);
 		    String firstname = row.getCell(0).getStringCellValue();
@@ -50,42 +57,36 @@ public class signup {
 		   int postcode = (int) row.getCell(6).getNumericCellValue();
 		    String address = row.getCell(7).getStringCellValue();
 
-
-
-
-		    
-				Thread.sleep(2000);
+		    Thread.sleep(2000);
 		
 			
-		
-		driver.get("http://opencart.evolvesnacks.com");
-		driver.findElement(By.xpath("//*[@id='Menu_YnwtL2RI']/nav/ul/li[1]/a/span/span/i")).click();
-
-		driver.findElement(By.xpath("//*[@id='System_EdTQU5Px']/div/div[1]/div/div[2]/div/a")).click();
+		//Click on signup
+		driver.findElement(By.xpath("//*[@id='System_HsRdKbkl']/div/div[1]/div/div[2]/div/a")).click();
 
 		driver.findElement(By.name("firstname")).sendKeys(firstname);
 		driver.findElement(By.name("lastname")).sendKeys(lastname);
 		driver.findElement(By.name("email")).sendKeys(email);
 		driver.findElement(By.name("telephone")).sendKeys(""+telephone);
-		driver.findElement(By.name("password")).sendKeys(""+uuid);
-		driver.findElement(By.name("confirm")).sendKeys(""+uuid);
+		driver.findElement(By.name("password")).sendKeys(""+uuid1);
+		driver.findElement(By.name("confirm")).sendKeys(""+uuid1);
 		driver.findElement(By.name("address_1")).sendKeys(address);
 		driver.findElement(By.name("address_2")).sendKeys("test address");
 		driver.findElement(By.xpath("//*[@id='input-custom-field1']")).sendKeys(""+telephone);
 		driver.findElement(By.name("city")).sendKeys(city);
 		driver.findElement(By.name("postcode")).sendKeys(""+postcode);
 		driver.findElement(By.xpath("//*[@id='input-zone']")).sendKeys(state);
+		Thread.sleep(5000);
 		driver.findElement(By.xpath("//*[@id='System_6OjM9zPg']/form/div[2]/div[2]/input")).click();
 		
 		
-		
+		Thread.sleep(5000);
 		//Click on BuySnacks 
 		WebElement buysnacks=driver.findElement(By.xpath("//*[@id='menu_category_Menu_VIfWm2LT_461']/a/span/span"));
-		JavascriptExecutor executor = (JavascriptExecutor)driver;
-		executor.executeScript("arguments[0].click()", buysnacks);
+		JavascriptExecutor buysnacks1 = (JavascriptExecutor)driver;
+		buysnacks1.executeScript("arguments[0].click()", buysnacks);
 		Thread.sleep(2000);
 		
-		
+		//hover on my account
 		WebElement myaccount = driver.findElement(By.xpath("//*[@id='Menu_YnwtL2RI']/nav/ul/li[1]/a"));
 		Actions action = new Actions(driver);
 		action.moveToElement(myaccount).build().perform();
@@ -104,16 +105,17 @@ public class signup {
 				 XSSFCell cell=row.getCell(8);
 
 		
-			cell.setCellValue(""+uuid);
+			cell.setCellValue(""+uuid1);
 		
 			
-		 FileOutputStream fileOut = new FileOutputStream(new File("D:/signup data.xlsx"));
+		 FileOutputStream fileOut = new FileOutputStream(new File("E:/signup data.xlsx"));
       wb.write(fileOut);
       fileOut.flush();
       fileOut.close();
 		
 
 	}
+		driver.close();
 
 }
 		catch(Exception e)

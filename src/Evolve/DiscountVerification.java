@@ -10,31 +10,27 @@ import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.interactions.Actions;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class DiscountVerification {
+	static int evolvemoney1,money2;
 
 	public static void main(String[] args) {
 
 		try {
-			System.setProperty("webdriver.chrome.driver","D:\\chromedriver.exe");
+			System.setProperty("webdriver.chrome.driver","E:\\chromedriver.exe");
 			WebDriver driver = new ChromeDriver();
 		    driver.manage().window().maximize();
 	
 
 			
-			for(int a=1;a<4;a++)
-			{
 		
 	    
-		FileInputStream ExcelFile = new FileInputStream("D:/signup data.xlsx");
+		FileInputStream ExcelFile = new FileInputStream("E:/signup data.xlsx");
 		XSSFWorkbook wb = new XSSFWorkbook(ExcelFile); 
 		XSSFSheet sheet = wb.getSheet("Sheet1");
 			
 		
-		for(int i=1;i<2;i++)
+		for(int i=3;i<5;i++)
 		{
 			
 			XSSFRow row = sheet.getRow(i);
@@ -48,7 +44,10 @@ public class DiscountVerification {
 		driver.get("http://opencart.evolvesnacks.com");
 		
 		//Go to login screen
-		driver.findElement(By.xpath("//*[@id='Menu_YnwtL2RI']/nav/ul/li[1]/a/span/span/i")).click();
+		WebElement login=driver.findElement(By.xpath("//*[@id='Menu_YnwtL2RI']/nav/ul/li[1]/a/span/span/i"));
+		JavascriptExecutor executor5 = (JavascriptExecutor)driver;
+		executor5.executeScript("arguments[0].click()", login);
+		Thread.sleep(2000);
 		
 		//Enter email and password
 		driver.findElement(By.xpath("//*[@id='input-email']")).sendKeys(email);
@@ -59,20 +58,18 @@ public class DiscountVerification {
 		
 		Thread.sleep(2000);
 
-		
+		System.out.println("login successful:- "+email);
+
+		for(int a=1;a<4;a++)
+		{
+			
 		//Click on BuySnacks 
 		WebElement buysnacks=driver.findElement(By.xpath("//*[@id='menu_category_Menu_VIfWm2LT_461']/a/span/span"));
 		JavascriptExecutor executor = (JavascriptExecutor)driver;
 		executor.executeScript("arguments[0].click()", buysnacks);
 		Thread.sleep(2000);
 	
-		WebElement myaccount = driver.findElement(By.xpath("//*[@id='Menu_YnwtL2RI']/nav/ul/li[1]/a"));
-		Actions action = new Actions(driver);
-		action.moveToElement(myaccount).build().perform();
-
-		WebDriverWait wait = new WebDriverWait(driver, 5); 
-		wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//*[@id='Menu_YnwtL2RI']/nav/ul/li[1]/ul/li[5]/a/span")));  // until this submenu is found
-
+		
 		if(a==1)
 				{
 
@@ -142,12 +139,12 @@ Thread.sleep(5000);
 		String subtotal1=subtotal.replaceAll("[^0-9]", "");
 		int subtotal2= Integer.valueOf(subtotal1);
 		int subtotal3=subtotal2/100;
-		System.out.println("cart sub-total is:- "+subtotal3);
+		System.out.println("\n cart sub-total is:- "+subtotal3);
 		
 		if(subtotal3<500)
 		{
 			int evolvemoney=subtotal3*5;
-			int evolvemoney1=evolvemoney/100;
+			evolvemoney1=evolvemoney/100;
 			System.out.println("Expected 5% evolve money:- "+evolvemoney1);
 		}
 
@@ -155,14 +152,14 @@ Thread.sleep(5000);
 		else if(subtotal3>500 && subtotal3<1000)
 		{
 			int evolvemoney=subtotal3*7;
-			int evolvemoney1=evolvemoney/100;
+			evolvemoney1=evolvemoney/100;
 			System.out.println("Expected 7% evolve money:- "+evolvemoney1);	
 		}
 		
 		if(subtotal3>1000)
 		{
 			int evolvemoney=subtotal3*10;
-			int evolvemoney1=evolvemoney/100;
+			evolvemoney1=evolvemoney/100;
 			System.out.println("Expected 10% evolve money:- "+evolvemoney1);
 		}
 		
@@ -172,18 +169,18 @@ Thread.sleep(5000);
 		WebElement we1=	driver.findElement(By.id("button-payment-address"));
 		JavascriptExecutor executor3 = (JavascriptExecutor)driver;
 		executor3.executeScript("arguments[0].click()", we1);
-		Thread.sleep(2000);
+		Thread.sleep(5000);
 		
 		driver.findElement(By.id("button-shipping-address")).click();
-		Thread.sleep(2000);
+		Thread.sleep(5000);
 		driver.findElement(By.id("button-shipping-method")).click();
-		Thread.sleep(2000);
+		Thread.sleep(5000);
 		driver.findElement(By.xpath("//*[@id='collapse-payment-method']/div/div[2]/label/span")).click();
-		Thread.sleep(2000);
+		Thread.sleep(5000);
 		driver.findElement(By.xpath("//*[@id='button-payment-method']")).click();
-		Thread.sleep(2000);
+		Thread.sleep(5000);
 		driver.findElement(By.xpath("//*[@id='collapse-checkout-confirm']/div/div[2]/div/input")).click();
-		Thread.sleep(2000);
+		Thread.sleep(5000);
 
 		
 		String orderid=driver.findElement(By.xpath("//*[@id='System_6OjM9zPg']/div/div/p[1]")).getText();
@@ -205,6 +202,8 @@ Thread.sleep(5000);
 	driver1.findElement(By.id("input-password")).sendKeys("Evolve@123#");
 	driver1.findElement(By.xpath("//*[@class='text-right']/button")).click();
 	
+	System.out.println("login successfully to admin panel");
+	
 	Thread.sleep(5000);
 	driver1.findElement(By.xpath("//*[@id='menu-sale']/a")).click();
 	driver1.findElement(By.xpath("//*[@id='menu-sale']/ul/li[1]/a")).click();
@@ -219,30 +218,44 @@ Thread.sleep(5000);
 	driver1.findElement(By.xpath("//*[@id='bulk_action_id']")).sendKeys("complete");
 	driver1.findElement(By.xpath("//*[@id='button-bulk-action']")).click();
 	Thread.sleep(5000);
+	System.out.println("order no. :"+orderid2+" changed to complete");
 	driver1.close();
 	
 	
 	//check evolve money gained
-	
-	 //driver.findElement(By.xpath("//*[@id='Menu_YnwtL2RI']/nav/ul/li[1]/ul/li[5]/a/span")).click();
-	driver.findElement(By.xpath("//*[@class='tb_icon']")).click();
+	driver.findElement(By.xpath("//*[@id='Menu_YnwtL2RI']/nav/ul/li[1]/a")).click();
 	driver.findElement(By.xpath("//*[@id='System_DdmbwILT']/div/div[2]/ul/li[2]/a")).click();
 	Thread.sleep(2000);
 	
-	String order= driver.findElement(By.xpath("//*[@id='System_WoxEIx9A']/div[1]/table/tbody/tr/td[2]")).getText();
-	String order1=order.replaceAll("[^0-9]", "");
+	
+	WebElement order= driver.findElement(By.xpath("//*[@id='System_HsRdKbkl']/div[1]/table/tbody/tr[1]/td[2]/a"));
+	String order3=order.getText();
+	String order1=order3.replaceAll("[^0-9]", "");
 	int order2= Integer.valueOf(order1);
 	
 	if(order2==orderid2)
 	{
-		String money=driver.findElement(By.xpath("//*[@id='System_WoxEIx9A']/div[1]/table/tbody/tr/td[3]")).getText();
+		WebElement money3=driver.findElement(By.xpath("//*[@id='System_HsRdKbkl']/div[1]/table/tbody/tr[1]/td[3]"));
+		String money=money3.getText();
 		String money1=money.replaceAll("[^0-9]", "");
-		int money2= Integer.valueOf(money1);
+		 money2= Integer.valueOf(money1);
 		System.out.println("received Evolve money:- "+money2);
 		
 		
 	}
 	
+	if(evolvemoney1==money2)
+	{
+		System.out.println("test passed");
+	}
+	
+	else
+	{
+		System.out.println("test failed");
+	}
+	
+		} 
+			
 	
 	//identify logout
 		WebElement logout = driver.findElement(By.xpath("//*[@id='Menu_YnwtL2RI']/nav/ul/li[1]/ul/li[5]/a/span"));
@@ -250,12 +263,12 @@ Thread.sleep(5000);
 	executor1.executeScript("arguments[0].click()", logout);
 	Thread.sleep(2000);
 
+	System.out.println("logout successfully:- "+email);
 
     
      System.out.println("\n\n\n");
 	
-		} 
-			
+	
 
 
 		}
