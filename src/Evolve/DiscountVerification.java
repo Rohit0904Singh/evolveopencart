@@ -2,6 +2,7 @@ package Evolve;
 
 import java.io.FileInputStream;
 
+import org.apache.commons.lang3.RandomStringUtils;
 import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
@@ -73,33 +74,33 @@ public class DiscountVerification {
 		if(a==1)
 				{
 
-		//Add items to cart
-		driver.findElement(By.xpath("//*[@id='ProductsSystem_ReH9ivFH']/div[1]/div[1]/div/div[2]/div[2]/div[1]/a")).click();
-		Thread.sleep(2000);
-		driver.findElement(By.xpath("//*[@id='ProductsSystem_ReH9ivFH']/div[1]/div[5]/div/div[2]/div[2]/div[1]/a")).click();
-		Thread.sleep(2000);
-		driver.findElement(By.xpath("//*[@id='ProductsSystem_ReH9ivFH']/div[1]/div[6]/div/div[2]/div[2]/div[1]/a")).click();
-		Thread.sleep(2000);
-		driver.findElement(By.xpath("//*[@id='ProductsSystem_ReH9ivFH']/div[1]/div[8]/div/div[2]/div[2]/div[1]/a")).click();
+			//Add items to cart
+			driver.findElement(By.xpath("//*[@id='ProductsSystem_ReH9ivFH']/div[1]/div[1]/div/div[2]/div[2]/div[1]/a")).click();
+			Thread.sleep(2000);
+			driver.findElement(By.xpath("//*[@id='ProductsSystem_ReH9ivFH']/div[1]/div[5]/div/div[2]/div[2]/div[1]/a")).click();
+			Thread.sleep(2000);
+			driver.findElement(By.xpath("//*[@id='ProductsSystem_ReH9ivFH']/div[1]/div[6]/div/div[2]/div[2]/div[1]/a")).click();
+			Thread.sleep(2000);
+			driver.findElement(By.xpath("//*[@id='ProductsSystem_ReH9ivFH']/div[1]/div[8]/div/div[2]/div[2]/div[1]/a")).click();
 
-		Thread.sleep(5000);
+			Thread.sleep(5000);
 		}
 		
 		else if(a==2)
 		{
-			for(int b=1;b<5;b++)
+			for(int b=1;b<4;b++)
 			{
 
-//Add items to cart
-driver.findElement(By.xpath("//*[@id='ProductsSystem_ReH9ivFH']/div[1]/div[1]/div/div[2]/div[2]/div[1]/a")).click();
-Thread.sleep(2000);
-driver.findElement(By.xpath("//*[@id='ProductsSystem_ReH9ivFH']/div[1]/div[5]/div/div[2]/div[2]/div[1]/a")).click();
-Thread.sleep(2000);
-driver.findElement(By.xpath("//*[@id='ProductsSystem_ReH9ivFH']/div[1]/div[6]/div/div[2]/div[2]/div[1]/a")).click();
-Thread.sleep(2000);
-driver.findElement(By.xpath("//*[@id='ProductsSystem_ReH9ivFH']/div[1]/div[8]/div/div[2]/div[2]/div[1]/a")).click();
+				//Add items to cart
+				driver.findElement(By.xpath("//*[@id='ProductsSystem_ReH9ivFH']/div[1]/div[1]/div/div[2]/div[2]/div[1]/a")).click();
+				Thread.sleep(2000);
+				driver.findElement(By.xpath("//*[@id='ProductsSystem_ReH9ivFH']/div[1]/div[5]/div/div[2]/div[2]/div[1]/a")).click();
+				Thread.sleep(2000);
+				driver.findElement(By.xpath("//*[@id='ProductsSystem_ReH9ivFH']/div[1]/div[6]/div/div[2]/div[2]/div[1]/a")).click();
+				Thread.sleep(2000);
+				driver.findElement(By.xpath("//*[@id='ProductsSystem_ReH9ivFH']/div[1]/div[8]/div/div[2]/div[2]/div[1]/a")).click();
 
-Thread.sleep(5000);
+				Thread.sleep(5000);
 			}
 }
 	
@@ -107,17 +108,16 @@ Thread.sleep(5000);
 		{
 			for(int b=1;b<8;b++)
 			{
+				//Add items to cart
+				driver.findElement(By.xpath("//*[@id='ProductsSystem_ReH9ivFH']/div[1]/div[1]/div/div[2]/div[2]/div[1]/a")).click();
+				Thread.sleep(2000);
+				driver.findElement(By.xpath("//*[@id='ProductsSystem_ReH9ivFH']/div[1]/div[5]/div/div[2]/div[2]/div[1]/a")).click();
+				Thread.sleep(2000);
+				driver.findElement(By.xpath("//*[@id='ProductsSystem_ReH9ivFH']/div[1]/div[6]/div/div[2]/div[2]/div[1]/a")).click();
+				Thread.sleep(2000);
+				driver.findElement(By.xpath("//*[@id='ProductsSystem_ReH9ivFH']/div[1]/div[8]/div/div[2]/div[2]/div[1]/a")).click();
 
-//Add items to cart
-driver.findElement(By.xpath("//*[@id='ProductsSystem_ReH9ivFH']/div[1]/div[1]/div/div[2]/div[2]/div[1]/a")).click();
-Thread.sleep(2000);
-driver.findElement(By.xpath("//*[@id='ProductsSystem_ReH9ivFH']/div[1]/div[5]/div/div[2]/div[2]/div[1]/a")).click();
-Thread.sleep(2000);
-driver.findElement(By.xpath("//*[@id='ProductsSystem_ReH9ivFH']/div[1]/div[6]/div/div[2]/div[2]/div[1]/a")).click();
-Thread.sleep(2000);
-driver.findElement(By.xpath("//*[@id='ProductsSystem_ReH9ivFH']/div[1]/div[8]/div/div[2]/div[2]/div[1]/a")).click();
-
-Thread.sleep(5000);
+				Thread.sleep(5000);
 			}
 }
 	
@@ -228,14 +228,14 @@ Thread.sleep(5000);
 	Thread.sleep(2000);
 	
 	
-	WebElement order= driver.findElement(By.xpath("//*[@id='System_HsRdKbkl']/div[1]/table/tbody/tr[1]/td[2]/a"));
+	WebElement order= driver.findElement(By.xpath("//*[@id='System_iEByBbpF']/div[1]/table/tbody/tr[1]/td[2]/a"));
 	String order3=order.getText();
 	String order1=order3.replaceAll("[^0-9]", "");
 	int order2= Integer.valueOf(order1);
 	
 	if(order2==orderid2)
 	{
-		WebElement money3=driver.findElement(By.xpath("//*[@id='System_HsRdKbkl']/div[1]/table/tbody/tr[1]/td[3]"));
+		WebElement money3=driver.findElement(By.xpath("//*[@id='System_iEByBbpF']/div[1]/table/tbody/tr[1]/td[3]"));
 		String money=money3.getText();
 		String money1=money.replaceAll("[^0-9]", "");
 		 money2= Integer.valueOf(money1);

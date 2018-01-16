@@ -2,6 +2,7 @@ package Evolve;
 
 import java.io.FileInputStream;
 
+import org.apache.commons.lang3.RandomStringUtils;
 import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
@@ -35,7 +36,7 @@ public class Coupon {
 
 		
 			
-			for(int i=1;i<5;i++)
+			for(int i=11;i<15;i++)
 			{
 				
 				XSSFRow row = sheet.getRow(i);
@@ -77,16 +78,13 @@ public class Coupon {
 			executor.executeScript("arguments[0].click()", buysnacks);
 			Thread.sleep(2000);
 
+			for(int k=0;k<6;k++)
+			{
+			String uuid1 = RandomStringUtils.random(1, "123456789"); 
 			//Add items to cart
-			driver.findElement(By.xpath("//*[@id='ProductsSystem_ReH9ivFH']/div[1]/div[1]/div/div[2]/div[2]/div[1]/a")).click();
+			driver.findElement(By.xpath("//*[@id='ProductsSystem_ReH9ivFH']/div[1]/div["+uuid1+"]/div/div[2]/div[2]/div[1]/a")).click();
 			Thread.sleep(2000);
-			driver.findElement(By.xpath("//*[@id='ProductsSystem_ReH9ivFH']/div[1]/div[5]/div/div[2]/div[2]/div[1]/a")).click();
-			Thread.sleep(2000);
-			driver.findElement(By.xpath("//*[@id='ProductsSystem_ReH9ivFH']/div[1]/div[6]/div/div[2]/div[2]/div[1]/a")).click();
-			Thread.sleep(2000);
-			driver.findElement(By.xpath("//*[@id='ProductsSystem_ReH9ivFH']/div[1]/div[8]/div/div[2]/div[2]/div[1]/a")).click();
-
-			Thread.sleep(5000);
+			}
 		
 			//Go to cart
 			WebElement we =driver.findElement(By.xpath("//*[@class='tb_icon ico-organie-basket']"));
@@ -110,13 +108,18 @@ public class Coupon {
 		    System.out.println("\nCoupon entered:- "+coupon);
 			driver.findElement(By.xpath("//*[@id='button-coupon']")).click();
 			Thread.sleep(5000);
-			WebElement couponmessage =driver.findElement(By.xpath("//*[@id='System_HsRdKbkl']/div/div[2]/div[1]"));
+			WebElement couponmessage =driver.findElement(By.xpath("//*[@id='System_iEByBbpF']/div/div[2]/div[1]"));
 			String couponmessage1=couponmessage.getText();
 			System.out.println("coupon messgae:- "+couponmessage1);
 			Thread.sleep(2000);
 
 			//Check out process
-			WebElement we1=	driver.findElement(By.id("button-payment-address"));
+		/*	WebElement we1=	driver.findElement(By.id("button-payment-address"));
+			JavascriptExecutor executor3 = (JavascriptExecutor)driver;
+			executor3.executeScript("arguments[0].click()", we1);
+			Thread.sleep(2000);
+			*/
+			WebElement we1=	driver.findElement(By.xpath("//*[@class='pull-right']/input"));
 			JavascriptExecutor executor3 = (JavascriptExecutor)driver;
 			executor3.executeScript("arguments[0].click()", we1);
 			Thread.sleep(2000);

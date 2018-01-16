@@ -35,7 +35,7 @@ public class signup {
 		XSSFSheet sheet = wb.getSheet("Sheet1");
 			
 		
-		for(int i=17;i<19;i++)
+		for(int i=19;i<20;i++)
 		{
 			//Go to login screen
 			WebElement login=driver.findElement(By.xpath("//*[@id='Menu_YnwtL2RI']/nav/ul/li[1]/a/span/span/i"));
@@ -61,7 +61,7 @@ public class signup {
 		
 			
 		//Click on signup
-		driver.findElement(By.xpath("//*[@id='System_HsRdKbkl']/div/div[1]/div/div[2]/div/a")).click();
+		driver.findElement(By.xpath("//*[@id='System_iEByBbpF']/div/div[1]/div/div[2]/div/a")).click();
 
 		driver.findElement(By.name("firstname")).sendKeys(firstname);
 		driver.findElement(By.name("lastname")).sendKeys(lastname);
@@ -86,6 +86,13 @@ public class signup {
 		buysnacks1.executeScript("arguments[0].click()", buysnacks);
 		Thread.sleep(2000);
 		
+		System.out.println("User Created Successfully :- "+email);
+		
+		//Click on Hampers
+		
+	driver.findElement(By.xpath("//*[@id='menu_category_Menu_VIfWm2LT_462']/a/span/span")).click();
+	Thread.sleep(3000);
+		
 		//hover on my account
 		WebElement myaccount = driver.findElement(By.xpath("//*[@id='Menu_YnwtL2RI']/nav/ul/li[1]/a"));
 		Actions action = new Actions(driver);
@@ -100,6 +107,8 @@ public class signup {
 		JavascriptExecutor executor2 = (JavascriptExecutor)driver;
 		executor2.executeScript("arguments[0].click()", logout);
 		Thread.sleep(2000);
+		
+		System.out.println("User Logged out :- " +email);
 
 		
 				 XSSFCell cell=row.getCell(8);
@@ -113,6 +122,7 @@ public class signup {
       fileOut.flush();
       fileOut.close();
 		
+      System.out.println("Password updated in excel file \n\n");
 
 	}
 		driver.close();

@@ -2,6 +2,7 @@ package Evolve;
 import java.io.FileInputStream;
 import java.io.IOException;
 
+import org.apache.commons.lang3.RandomStringUtils;
 import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
@@ -29,7 +30,7 @@ public class login {
 		XSSFSheet sheet = wb.getSheet("Sheet1");
 			
 		
-		for(int i=1;i<11;i++)
+		for(int i=17;i<20;i++)
 		{
 			
 			XSSFRow row = sheet.getRow(i);
@@ -64,16 +65,13 @@ public class login {
 		Thread.sleep(2000);
 		System.out.println("\n\nlogin successful:- "+email);
 		
+		for(int j=0;j<5;j++)
+		{
+		String uuid1 = RandomStringUtils.random(1, "123456789"); 
 		//Add items to cart
-		driver.findElement(By.xpath("//*[@id='ProductsSystem_ReH9ivFH']/div[1]/div[1]/div/div[2]/div[2]/div[1]/a")).click();
+		driver.findElement(By.xpath("//*[@id='ProductsSystem_ReH9ivFH']/div[1]/div["+uuid1+"]/div/div[2]/div[2]/div[1]/a")).click();
 		Thread.sleep(2000);
-		driver.findElement(By.xpath("//*[@id='ProductsSystem_ReH9ivFH']/div[1]/div[5]/div/div[2]/div[2]/div[1]/a")).click();
-		Thread.sleep(2000);
-		driver.findElement(By.xpath("//*[@id='ProductsSystem_ReH9ivFH']/div[1]/div[6]/div/div[2]/div[2]/div[1]/a")).click();
-		Thread.sleep(2000);
-		driver.findElement(By.xpath("//*[@id='ProductsSystem_ReH9ivFH']/div[1]/div[8]/div/div[2]/div[2]/div[1]/a")).click();
-
-		Thread.sleep(5000);
+		}
 		
 		//Go to cart
 		WebElement we =driver.findElement(By.xpath("//*[@class='tb_icon ico-organie-basket']"));

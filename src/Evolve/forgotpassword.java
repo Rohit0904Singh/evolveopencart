@@ -41,7 +41,7 @@ public class forgotpassword {
 				Thread.sleep(2000);		
 				
 				//Go to forgot password
-				WebElement forgot=driver.findElement(By.xpath("//*[@id='System_enua7jun']/div/div[2]/div/form/div/div[1]/a"));
+				WebElement forgot=driver.findElement(By.xpath("//*[@id='System_aaSXCFZb']/div/div[2]/div/form/div/div[1]/a"));
 				JavascriptExecutor executor2 = (JavascriptExecutor)driver;
 				executor2.executeScript("arguments[0].click()", forgot);
 				Thread.sleep(3000);
@@ -51,11 +51,11 @@ public class forgotpassword {
 				System.out.println("\nentered email");
 
 				//click continue button
-				WebElement cont = driver.findElement(By.xpath("//*[@id='System_enua7jun']/form/div/div[2]/input"));
+				WebElement cont = driver.findElement(By.xpath("//*[@id='System_aaSXCFZb']/form/div/div[2]/input"));
 				JavascriptExecutor executor3 = (JavascriptExecutor)driver;
 				executor3.executeScript("arguments[0].click()", cont);
 				Thread.sleep(60000);
-				WebElement message= driver.findElement(By.xpath("//*[@id='System_enua7jun']/div[1]"));
+				WebElement message= driver.findElement(By.xpath("//*[@id='System_aaSXCFZb']/div[1]"));
 				String message1=message.getText();
 				System.out.println("message :- "+message1);
 				

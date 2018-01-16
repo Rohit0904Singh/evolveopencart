@@ -1,11 +1,14 @@
 package Evolve;
 
 import java.io.FileInputStream;
+import java.util.List;
 
+import org.apache.commons.lang3.RandomStringUtils;
 import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.openqa.selenium.By;
+import org.openqa.selenium.Dimension;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -33,7 +36,7 @@ public class coupon_login {
 				XSSFSheet sheet1 = wb.getSheet("Sheet2");
 					
 				
-				for(int i=1;i<5;i++)
+				for(int i=4;i<10;i++)
 				{
 					
 					XSSFRow row = sheet.getRow(i);
@@ -44,7 +47,8 @@ public class coupon_login {
 				    driver.get("http://opencart.evolvesnacks.com");
 					Thread.sleep(5000);
 				
-				for(int j=0;j<sheet1.getLastRowNum();j++)
+			//	for(int j=1;j<sheet1.getLastRowNum();j++)
+				for(int j=1;j<3;j++)
 				{
 					//Click on BuySnacks 
 					WebElement buysnacks=driver.findElement(By.xpath("//*[@id='menu_category_Menu_VIfWm2LT_461']/a/span/span"));
@@ -52,16 +56,13 @@ public class coupon_login {
 					executor.executeScript("arguments[0].click()", buysnacks);
 					Thread.sleep(2000);
 					
+					for(int k=0;k<4;k++)
+					{
+					String uuid1 = RandomStringUtils.random(1, "1456789"); 
 					//Add items to cart
-					driver.findElement(By.xpath("//*[@id='ProductsSystem_ReH9ivFH']/div[1]/div[5]/div/div[2]/div[2]/div[1]/a")).click();
+					driver.findElement(By.xpath("//*[@id='ProductsSystem_ReH9ivFH']/div[1]/div["+uuid1+"]/div/div[2]/div[2]/div[1]/a")).click();
 					Thread.sleep(2000);
-					driver.findElement(By.xpath("//*[@id='ProductsSystem_ReH9ivFH']/div[1]/div[9]/div/div[2]/div[2]/div[1]/a")).click();
-					Thread.sleep(2000);
-					driver.findElement(By.xpath("//*[@id='ProductsSystem_ReH9ivFH']/div[1]/div[11]/div/div[2]/div[2]/div[1]/a")).click();
-					Thread.sleep(2000);
-					driver.findElement(By.xpath("//*[@id='ProductsSystem_ReH9ivFH']/div[1]/div[14]/div/div[2]/div[2]/div[1]/a")).click();
-
-					Thread.sleep(5000);
+					}
 					
 				//Go to cart
 				WebElement we =driver.findElement(By.xpath("//*[@class='tb_icon ico-organie-basket']"));
@@ -88,24 +89,48 @@ public class coupon_login {
 				
 				Thread.sleep(5000);
 				
-			/*	WebElement couponmessage = driver.findElement(By.xpath("//*[@id='System_ipgD4p7y']/div[1]"));
-			String couponmessage1= couponmessage.getText();
-			System.out.println("coupon message:- "+couponmessage1);
-			driver.findElement(By.xpath("//*[@id='System_ipgD4p7y']/div[3]/div[2]/div/a")).click();
-				
+			
+			List<WebElement> couponmessage = driver.findElements(By.xpath("//*[@id='System_ipgD4p7y']/div[1]/div"));
+			System.out.println(couponmessage.size());
+			if(couponmessage.size()==0)
+			{
+				WebElement couponmessage1= driver.findElement(By.xpath("//*[@id='System_ipgD4p7y']/div[1]"));
+			String couponmessage2= couponmessage1.getText();
+			System.out.println("coupon message:- "+couponmessage2);
+		
 				Thread.sleep(5000);
 				
-				*/
+			
 				
 				//click on check out
+				
+			 driver.findElement(By.xpath("//*[@id='System_ipgD4p7y']/div[3]/div[2]/div/a")).click();				
+				/*
 				WebElement we5=	driver.findElement(By.xpath("//*[@class='pull-right']/a"));
 				JavascriptExecutor executor5 = (JavascriptExecutor)driver;
 				executor5.executeScript("arguments[0].click()", we5);
 			
+				*/
+			}
+			
+			else
+			{
+				WebElement couponmessage1= driver.findElement(By.xpath("//*[@id='System_ipgD4p7y']/div[1]/div"));
+				String couponmessage2= couponmessage1.getText();
+				System.out.println("coupon message:- "+couponmessage2);
+			
+					Thread.sleep(5000);
+					
 				
-				
+					
+					//click on check out
+					
+				 driver.findElement(By.xpath("//*[@id='System_ipgD4p7y']/div[2]/div[2]/div/a")).click();				
+					
+			}
 				//Click on returning customer
 				Thread.sleep(2000);
+			
 
 				WebElement we6=driver.findElement(By.xpath("//*[@id='collapse-checkout-option']/div/ul/li[2]/a/legend"));
 				JavascriptExecutor executor6 = (JavascriptExecutor)driver;

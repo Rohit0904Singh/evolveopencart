@@ -37,7 +37,7 @@ public static void main(String[] args) throws IOException {
 		XSSFSheet sheet = wb.getSheet("Sheet1");
 			
 		
-		for(int i=1;i<11;i++)
+		for(int i=16;i<24;i++)
 		{
 			
 			XSSFRow row = sheet.getRow(i);
@@ -65,7 +65,7 @@ public static void main(String[] args) throws IOException {
 			
 			Thread.sleep(2000);
 			
-			System.out.println(i+" login successful"+":- "+email);
+			System.out.println(" \n\n login successful"+":- "+email);
 
 
 		
@@ -101,10 +101,7 @@ public static void main(String[] args) throws IOException {
 		}
 		}
 
-private static void highLighterMethod(WebDriver driver) {
-	// TODO Auto-generated method stub
-	
-}
+
 	}
 	
 	
