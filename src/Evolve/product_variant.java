@@ -1,6 +1,7 @@
 package Evolve;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.util.List;
 
 import org.apache.commons.lang3.RandomStringUtils;
 import org.apache.poi.xssf.usermodel.XSSFRow;
@@ -16,7 +17,7 @@ import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-public class login {
+public class product_variant {
 
 	public static void main(String[] args) throws IOException {
 		
@@ -53,6 +54,7 @@ public class login {
 			//	Thread.sleep(2000);
 			
 		
+			
 			//Go to login screen
 			WebElement login=driver.findElement(By.xpath("//*[@id='Menu_YnwtL2RI']/nav/ul/li[1]/a/span/span/i"));
 			JavascriptExecutor executor5 = (JavascriptExecutor)driver;
@@ -74,14 +76,35 @@ public class login {
 		JavascriptExecutor executor = (JavascriptExecutor)driver;
 		executor.executeScript("arguments[0].click()", buysnacks);
 		Thread.sleep(2000);
-		System.out.println("\n\nlogin successful:- "+email);
+		System.out.println("\n\nlogin successful:- "+email+"\n\n");
+		
+		System.out.println("Adding to Cart :- ");
 		
 		for(int j=0;j<5;j++)
 		{
-			String uuid1 = RandomStringUtils.random(1, "123456789"); 
+			String uuid1 = RandomStringUtils.random(1, "12"); 
+			String uuid2 = RandomStringUtils.random(1, "12"); 
+			
+	
+
+
+			WebElement proname=driver.findElement(By.xpath("//*[@id='ProductsSystem_ReH9ivFH']/div[1]/div["+uuid1+"]/div/div[2]/div/h4/a"));
+			WebElement variant=driver.findElement(By.xpath("//*[@id='ProductsSystem_ReH9ivFH']/div[1]/div["+uuid1+"]/div/div[2]/div[1]/div/div/div/div["+uuid2+"]/label/span"));
+
+			String variant1=variant.getText();
+			String proname1=proname.getText();
+			
+			int k=j+1;
+			
+			System.out.println("\n"+k+") "+proname1+" :- "+variant1);
+			
+			variant.click();
+
+
 			//Add items to cart
 			driver.findElement(By.xpath("//*[@id='ProductsSystem_ReH9ivFH']/div[1]/div["+uuid1+"]/div/div[2]/div[2]/div[1]/a")).click();
 			Thread.sleep(2000);
+
 		}
 		
 		//Go to cart
@@ -115,10 +138,32 @@ public class login {
 
 		
 		
-		System.out.println(driver.findElement(By.xpath("//*[@id='System_6OjM9zPg']/div/div/p[1]")).getText());
-		System.out.println(driver.findElement(By.xpath(".//*[@id='System_6OjM9zPg']/div/div/p[2]")).getText());
+		System.out.println("\n"+driver.findElement(By.xpath("//*[@id='System_6OjM9zPg']/div/div/p[1]")).getText());
+		//System.out.println(driver.findElement(By.xpath(".//*[@id='System_6OjM9zPg']/div/div/p[2]")).getText());
 		
-		System.out.println("Order placed by :-"+email);
+		System.out.println("\n Order placed by :-"+email);
+		
+		
+		driver.findElement(By.xpath("//*[@id='Menu_YnwtL2RI']/nav/ul/li[1]/a")).click();
+		Thread.sleep(3000);
+		driver.findElement(By.xpath("//*[@id='System_DdmbwILT']/div/div[2]/ul/li[1]/a")).click();
+		Thread.sleep(3000);
+		driver.findElement(By.xpath("//*[@id='System_ipgD4p7y']/div[1]/table/tbody/tr[1]/td[10]/a")).click();
+		Thread.sleep(3000);
+		List<WebElement> count=driver.findElements(By.xpath("//*[@id='System_efpc8hNa']/div/div[1]/table/tbody/tr"));
+		
+		System.out.println("\nProducts ordered :-");
+		
+		for(int a=1;a<=count.size();a++)
+		{
+		 WebElement pro =	driver.findElement(By.xpath("//*[@id='System_efpc8hNa']/div/div[1]/table/tbody/tr["+a+"]/td[1]"));
+		 String pro1=pro.getText();
+		 WebElement pro2 =	driver.findElement(By.xpath("//*[@id='System_efpc8hNa']/div/div[1]/table/tbody/tr["+a+"]/td[3]"));
+		 String pro3=pro2.getText();
+		 
+		 System.out.println("\n"+a+") "+pro1 +" :- "+pro3);
+		}
+
 
 		//hover my account
 		WebElement myaccount = driver.findElement(By.xpath("//*[@id='Menu_YnwtL2RI']/nav/ul/li[1]/a"));

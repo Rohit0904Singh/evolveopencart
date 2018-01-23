@@ -11,6 +11,7 @@ import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 
 public class DiscountVerification {
 	static int evolvemoney1,money2;
@@ -19,9 +20,21 @@ public class DiscountVerification {
 
 		try {
 			System.setProperty("webdriver.chrome.driver","E:\\chromedriver.exe");
-			WebDriver driver = new ChromeDriver();
-		    driver.manage().window().maximize();
-	
+			ChromeOptions options = new ChromeOptions();
+			options.addArguments("--disable-notifications");
+				WebDriver driver = new ChromeDriver(options);
+			    driver.manage().window().maximize();
+			    
+				
+			    //open evolve snacks
+				driver.get("http://opencart.evolvesnacks.com");
+				
+				Thread.sleep(10000);
+				driver.findElement(By.xpath("//*[@id='pro-modal']/div/div/div/button")).click();
+
+
+	         driver.findElement(By.xpath("/html/body/div[1]/div/div[3]/button[1]")).click();
+
 
 			
 		
@@ -41,8 +54,7 @@ public class DiscountVerification {
 			//	Thread.sleep(2000);
 			
 			
-		//open evolve snacks
-		driver.get("http://opencart.evolvesnacks.com");
+		
 		
 		//Go to login screen
 		WebElement login=driver.findElement(By.xpath("//*[@id='Menu_YnwtL2RI']/nav/ul/li[1]/a/span/span/i"));
@@ -228,14 +240,14 @@ public class DiscountVerification {
 	Thread.sleep(2000);
 	
 	
-	WebElement order= driver.findElement(By.xpath("//*[@id='System_iEByBbpF']/div[1]/table/tbody/tr[1]/td[2]/a"));
+	WebElement order= driver.findElement(By.xpath("//*[@id='System_efpc8hNa']/div[1]/table/tbody/tr[1]/td[2]/a"));
 	String order3=order.getText();
 	String order1=order3.replaceAll("[^0-9]", "");
 	int order2= Integer.valueOf(order1);
 	
 	if(order2==orderid2)
 	{
-		WebElement money3=driver.findElement(By.xpath("//*[@id='System_iEByBbpF']/div[1]/table/tbody/tr[1]/td[3]"));
+		WebElement money3=driver.findElement(By.xpath("//*[@id='System_efpc8hNa']/div[1]/table/tbody/tr[1]/td[3]"));
 		String money=money3.getText();
 		String money1=money.replaceAll("[^0-9]", "");
 		 money2= Integer.valueOf(money1);

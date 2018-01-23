@@ -12,6 +12,7 @@ import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -23,9 +24,21 @@ public class Coupon {
 			
 			try {
 
-			System.setProperty("webdriver.chrome.driver","E:\\chromedriver.exe");
-				WebDriver driver = new ChromeDriver();
-			    driver.manage().window().maximize();
+				System.setProperty("webdriver.chrome.driver","E:\\chromedriver.exe");
+				ChromeOptions options = new ChromeOptions();
+				options.addArguments("--disable-notifications");
+					WebDriver driver = new ChromeDriver(options);
+				    driver.manage().window().maximize();
+				    
+					
+				    //open evolve snacks
+					driver.get("http://opencart.evolvesnacks.com");
+					
+					Thread.sleep(10000);
+					driver.findElement(By.xpath("//*[@id='pro-modal']/div/div/div/button")).click();
+
+
+		         driver.findElement(By.xpath("/html/body/div[1]/div/div[3]/button[1]")).click();
 
 		    
 			FileInputStream ExcelFile = new FileInputStream("E:/signup data.xlsx");
@@ -46,9 +59,7 @@ public class Coupon {
 				//	Thread.sleep(2000);
 				
 				
-			    //open evolve snacks
-				driver.get("http://opencart.evolvesnacks.com");
-				
+			  
 				//Go to login screen
 				WebElement login=driver.findElement(By.xpath("//*[@id='Menu_YnwtL2RI']/nav/ul/li[1]/a/span/span/i"));
 				JavascriptExecutor executor5 = (JavascriptExecutor)driver;
@@ -69,7 +80,7 @@ public class Coupon {
 
 
 			//for(int j=0;j<sheet1.getLastRowNum();j++)
-				for(int j=0;j<5;j++)
+				for(int j=0;j<2;j++)
 
 			{
 			//Click on BuySnacks 
@@ -108,7 +119,7 @@ public class Coupon {
 		    System.out.println("\nCoupon entered:- "+coupon);
 			driver.findElement(By.xpath("//*[@id='button-coupon']")).click();
 			Thread.sleep(5000);
-			WebElement couponmessage =driver.findElement(By.xpath("//*[@id='System_iEByBbpF']/div/div[2]/div[1]"));
+			WebElement couponmessage =driver.findElement(By.xpath("//*[@id='System_efpc8hNa']/div/div[2]/div[1]"));
 			String couponmessage1=couponmessage.getText();
 			System.out.println("coupon messgae:- "+couponmessage1);
 			Thread.sleep(2000);

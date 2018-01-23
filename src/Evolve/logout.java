@@ -2,15 +2,19 @@ package Evolve;
 
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.util.Iterator;
+import java.util.Set;
 
 import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -24,19 +28,26 @@ public static void main(String[] args) throws IOException {
 
 		
 		try {
-
 		System.setProperty("webdriver.chrome.driver","E:\\chromedriver.exe");
-			WebDriver driver = new ChromeDriver();
+		ChromeOptions options = new ChromeOptions();
+		options.addArguments("--disable-notifications");
+			WebDriver driver = new ChromeDriver(options);
 		    driver.manage().window().maximize();
 		    
+			
+		    //open evolve snacks
+			driver.get("http://opencart.evolvesnacks.com");
+			
+			Thread.sleep(10000);
+			driver.findElement(By.xpath("//*[@id='pro-modal']/div/div/div/button")).click();
 
-	
-	    
+
+         driver.findElement(By.xpath("/html/body/div[1]/div/div[3]/button[1]")).click();
+		   
 		FileInputStream ExcelFile = new FileInputStream("E:/signup data.xlsx");
 		XSSFWorkbook wb = new XSSFWorkbook(ExcelFile); 
 		XSSFSheet sheet = wb.getSheet("Sheet1");
 			
-		
 		for(int i=16;i<24;i++)
 		{
 			
@@ -46,9 +57,10 @@ public static void main(String[] args) throws IOException {
 			
 			//	Thread.sleep(2000);
 			
-			
-		    //open evolve snacks
-			driver.get("http://opencart.evolvesnacks.com");
+		
+       
+
+
 			
 			//Go to login screen
 			WebElement login=driver.findElement(By.xpath("//*[@id='Menu_YnwtL2RI']/nav/ul/li[1]/a/span/span/i"));

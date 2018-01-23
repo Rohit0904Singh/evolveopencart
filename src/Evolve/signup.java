@@ -2,6 +2,7 @@ package Evolve;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
+
 import org.apache.commons.lang3.RandomStringUtils;
 import org.apache.poi.xssf.usermodel.XSSFCell;
 import org.apache.poi.xssf.usermodel.XSSFRow;
@@ -12,6 +13,7 @@ import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -22,20 +24,31 @@ public class signup {
 
 
 		try {
-			
 
-		System.setProperty("webdriver.chrome.driver", "E:\\chromedriver.exe");
-		WebDriver driver =new ChromeDriver();
-	    driver.manage().window().maximize();
-	    
-	    driver.get("http://opencart.evolvesnacks.com");
+			System.setProperty("webdriver.chrome.driver","E:\\chromedriver.exe");
+			ChromeOptions options = new ChromeOptions();
+			options.addArguments("--disable-notifications");
+				WebDriver driver = new ChromeDriver(options);
+			    driver.manage().window().maximize();
+			    
+				
+			    //open evolve snacks
+				driver.get("http://opencart.evolvesnacks.com");
+				
+				Thread.sleep(10000);
+				driver.findElement(By.xpath("//*[@id='pro-modal']/div/div/div/button")).click();
+
+
+	         driver.findElement(By.xpath("/html/body/div[1]/div/div[3]/button[1]")).click();
+
+
 		
 		FileInputStream ExcelFile = new FileInputStream("E:/signup data.xlsx");
 		XSSFWorkbook wb = new XSSFWorkbook(ExcelFile); 
 		XSSFSheet sheet = wb.getSheet("Sheet1");
 			
 		
-		for(int i=19;i<20;i++)
+		for(int i=25;i<27;i++)
 		{
 			//Go to login screen
 			WebElement login=driver.findElement(By.xpath("//*[@id='Menu_YnwtL2RI']/nav/ul/li[1]/a/span/span/i"));
@@ -46,7 +59,7 @@ public class signup {
 			
 			String uuid1 = RandomStringUtils.random(16, "0123456789abcdef"); 
 			
-			// long l = ByteBuffer.wrap(uuid.toString().getBytes()).getLong();
+			
 			XSSFRow row = sheet.getRow(i);
 		    String firstname = row.getCell(0).getStringCellValue();
 		    String lastname = row.getCell(1).getStringCellValue();
@@ -61,7 +74,7 @@ public class signup {
 		
 			
 		//Click on signup
-		driver.findElement(By.xpath("//*[@id='System_iEByBbpF']/div/div[1]/div/div[2]/div/a")).click();
+		driver.findElement(By.xpath("//*[@id='System_efpc8hNa']/div/div[1]/div/div[2]/div/a")).click();
 
 		driver.findElement(By.name("firstname")).sendKeys(firstname);
 		driver.findElement(By.name("lastname")).sendKeys(lastname);

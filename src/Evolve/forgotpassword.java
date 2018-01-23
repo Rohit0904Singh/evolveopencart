@@ -22,14 +22,15 @@ public class forgotpassword {
 
 			System.setProperty("webdriver.chrome.driver","E:\\chromedriver.exe");
 			WebDriver driver,driver2;
+			 String email= "sanjeevan.dignitas@gmail.com";
+			    String password= "123456";
 			
-		
+	/*	
 			
 			driver = new ChromeDriver();
 			    driver.manage().window().maximize();
 			
-			    String email= "sanjeevan.dignitas@gmail.com";
-			    String password= "123456";
+			   
 			    
 			  //open evolve snacks
 				driver.get("https://evolvesnacks.com/");
@@ -59,7 +60,7 @@ public class forgotpassword {
 				String message1=message.getText();
 				System.out.println("message :- "+message1);
 				
-				
+				*/
 			     driver2 = new ChromeDriver();
 
 			     driver2.manage().window().maximize();
@@ -91,7 +92,7 @@ public class forgotpassword {
 						{
 							driver2.findElement(By.xpath("//*[@id=':34']/tbody/tr["+i+"]/td[6]")).click();
 							Thread.sleep(5000);
-							driver2.findElement(By.xpath("//*[@class='gs']/div[7]/div/table/tbody/tr/td/table/tbody/tr/td")).click();
+							driver2.findElement(By.xpath("//*[@class='gs']/div[5]/div/table/tbody/tr/td/table/tbody/tr/td")).click();
 							
 							
 						
@@ -103,6 +104,8 @@ public class forgotpassword {
 					 
 					String parentid=(String) it.next();
 					String popup=(String) it.next();
+					
+					System.out.println("ids :- "+ids.size());
 					
 					driver2.switchTo().window(popup);
 					Thread.sleep(5000);
@@ -122,7 +125,7 @@ public class forgotpassword {
 					}
 					
 					driver2.quit();
-					
+			/*		
 					//Enter email and password
 					driver.findElement(By.xpath("//*[@id='input-email']")).sendKeys(email);
 					driver.findElement(By.xpath("//*[@id='input-password']")).sendKeys(password);
@@ -157,7 +160,7 @@ public class forgotpassword {
 
 					
 					driver.quit();
-
+*/
 		}
 		
 		catch(Exception e)
